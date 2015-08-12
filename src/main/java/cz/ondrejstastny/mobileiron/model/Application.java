@@ -61,7 +61,7 @@ public class Application {
 		this.id = id;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "Applications")
+	@ManyToMany(fetch = FetchType.LAZY)
 	public Set<Device> getDevices() {
 		return devices;
 	}
