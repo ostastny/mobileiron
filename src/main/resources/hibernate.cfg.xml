@@ -5,7 +5,7 @@
 
 <hibernate-configuration>
 <session-factory>
-    <property name="hibernate.connection.datasource">java:comp/env/jdbc/HerokuDB</property>
+    <property name="hibernate.connection.datasource">java:comp/env/jdbc/heroku</property>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">create</property>
