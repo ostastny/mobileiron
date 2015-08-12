@@ -68,7 +68,7 @@ public class User {
 		this.email = email;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Device")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Users")
 	public Set<Device> getDevices() {
 		return devices;
 	}
