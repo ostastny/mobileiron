@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+ 
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
+ <New id="HerokuDB" class="org.eclipse.jetty.plus.jndi.Resource">
+     <Arg></Arg>
+     <Arg>jdbc/HerokuDB</Arg>
+     <Arg>
+        <New class="org.postgresql.ds.PGSimpleDataSource">
+           <Set name="User">pkqepjxdokachn</Set>
+           <Set name="Password">wsAEuSJwebasHrTo37JYU0B9Gd</Set>
+           <Set name="DatabaseName">d9qtnpvsv04ol3</Set>
+           <Set name="ServerName">ec2-54-204-3-200.compute-1.amazonaws.com</Set>
+           <Set name="PortNumber">5432</Set>
+        </New>
+     </Arg>
+  </New>
+</Configure>
