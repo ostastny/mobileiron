@@ -16,8 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "Device", catalog = "mobileiron", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "PhoneNumber")})
+@Table(name = "device", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "phoneNumber")})
 public class Device {
 	private Integer id;
 	private String phoneNumber;
@@ -40,7 +40,7 @@ public class Device {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "DeviceId", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return id;
 	}
@@ -49,7 +49,7 @@ public class Device {
 		this.id = id;
 	}
 
-	@Column(name = "PhoneNumber", unique = true, nullable = false, length = 32)
+	@Column(name = "phoneNumber", unique = true, nullable = false, length = 32)
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -59,7 +59,7 @@ public class Device {
 	}
 
 
-	@Column(name = "OS", unique = false, nullable = false, length = 16)
+	@Column(name = "os", unique = false, nullable = false, length = 16)
 	public String getOperatingSystem() {
 		return operatingSystem;
 	}
@@ -69,9 +69,9 @@ public class Device {
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "DevicesToApps", catalog = "mobileiron", joinColumns = { 
-			@JoinColumn(name = "DeviceId", nullable = false, updatable = false) }, 
-			inverseJoinColumns = { @JoinColumn(name = "ApplicationId", 
+	@JoinTable(name = "application_device", joinColumns = { 
+			@JoinColumn(name = "devices_id", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "application_id", 
 					nullable = false, updatable = false) })
 	public Set<Application> getApps() {
 		return apps;

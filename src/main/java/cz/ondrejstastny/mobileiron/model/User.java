@@ -14,9 +14,9 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "User", catalog = "mobileiron", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "Name"),
-		@UniqueConstraint(columnNames = "Email") })
+@Table(name = "appuser", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "email"),
+		@UniqueConstraint(columnNames = "name")})
 public class User {
 	private Integer id;
 	private String name;
@@ -37,7 +37,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "UserId", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return id;
 	}
@@ -47,7 +47,7 @@ public class User {
 	}
 
 
-	@Column(name = "Name", unique = true, nullable = false, length = 128)
+	@Column(name = "name", unique = true, nullable = false, length = 128)
 	public String getName() {
 		return name;
 	}
@@ -58,7 +58,7 @@ public class User {
 	}
 
 
-	@Column(name = "Email", unique = true, nullable = false, length = 128)
+	@Column(name = "email", unique = true, nullable = false, length = 128)
 	public String getEmail() {
 		return email;
 	}
@@ -68,7 +68,7 @@ public class User {
 		this.email = email;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	public Set<Device> getDevices() {
 		return devices;
 	}

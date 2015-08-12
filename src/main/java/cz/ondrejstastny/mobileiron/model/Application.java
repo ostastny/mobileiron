@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "Application", catalog = "mobileiron", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "Name")})
+@Table(name = "application", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "name")})
 public class Application {
 	private Integer id;
 	private String name;
@@ -32,7 +32,7 @@ public class Application {
 		this.devices = devices;
 	}
 
-	@Column(name = "Description", unique = false, nullable = true, length = 512)
+	@Column(name = "description", unique = false, nullable = true, length = 512)
 	public String getDescription() {
 		return description;
 	}
@@ -41,7 +41,7 @@ public class Application {
 		this.description = description;
 	}
 
-	@Column(name = "Name", unique = true, nullable = false, length = 64)
+	@Column(name = "name", unique = true, nullable = false, length = 64)
 	public String getName() {
 		return name;
 	}
@@ -52,7 +52,7 @@ public class Application {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ApplicationId", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return id;
 	}
