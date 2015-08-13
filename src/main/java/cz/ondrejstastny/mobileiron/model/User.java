@@ -2,6 +2,8 @@ package cz.ondrejstastny.mobileiron.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -68,7 +70,7 @@ public class User {
 		this.email = email;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.PERSIST)
 	public Set<Device> getDevices() {
 		return devices;
 	}

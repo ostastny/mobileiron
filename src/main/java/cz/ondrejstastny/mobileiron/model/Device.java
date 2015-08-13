@@ -2,6 +2,8 @@ package cz.ondrejstastny.mobileiron.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "device", uniqueConstraints = {
@@ -68,7 +72,7 @@ public class Device {
 		this.operatingSystem = operatingSystem;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "application_device", joinColumns = { 
 			@JoinColumn(name = "devices_id", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "application_id", 
@@ -81,7 +85,8 @@ public class Device {
 		this.apps = apps;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
 	public User getUser() {
 		return user;
 	}

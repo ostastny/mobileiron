@@ -11,7 +11,8 @@
     <property name="hibernate.connection.password">wsAEuSJwebasHrTo37JYU0B9Gd</property>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.hbm2ddl.auto">create</property>
+    <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+    <!--<property name="hibernate.hbm2ddl.auto">create</property>-->
     <mapping class="cz.ondrejstastny.mobileiron.model.User" />
     <mapping class="cz.ondrejstastny.mobileiron.model.Device" />
     <mapping class="cz.ondrejstastny.mobileiron.model.Application" />
