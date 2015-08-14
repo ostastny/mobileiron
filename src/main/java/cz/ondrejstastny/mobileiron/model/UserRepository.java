@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import org.jvnet.hk2.annotations.Service;
 
 @Service
-public class UserRepository implements IRepository<User>{
+public class UserRepository implements IUserRepository{
 
 	@Inject SessionFactory sessionFactory;
 	
