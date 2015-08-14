@@ -7,10 +7,6 @@
         <servlet-name>Jersey Web Application</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>io.swagger.jaxrs.listing,cz.ondrejstastny.mobileiron</param-value>
-        </init-param>
-        <init-param>
     		<param-name>javax.ws.rs.Application</param-name>
     		<param-value>cz.ondrejstastny.mobileiron.Application</param-value>
   		</init-param>
@@ -29,12 +25,12 @@
         </init-param>
         <init-param>
             <param-name>swagger.api.basepath</param-name>
-            <param-value>http://localhost:8080/api</param-value>
+            <param-value>http://localhost:8080/mobileiron/api</param-value>
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Jersey Web Application</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 </web-app>
