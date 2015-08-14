@@ -51,7 +51,7 @@ APP.UserNewView = Backbone.View.extend({
 
   // populate the html to the dom
   render: function () {
-    this.$el.html(_.template($('#formTemplate').html(), this.user.toJSON()));
+    this.$el.html(_.template($('#userFormTemplate').html(), this.user.toJSON()));
     return this;
   }
 });

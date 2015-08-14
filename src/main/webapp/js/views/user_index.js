@@ -9,7 +9,7 @@ APP.UserIndexView = Backbone.View.extend({
 
   // populate the html to the dom
   render: function () {
-    this.$el.html($('#indexTemplate').html());
+    this.$el.html($('#userIndexTemplate').html());
     this.addAll();
     return this;
   },

@@ -1,5 +1,5 @@
 "use strict";
-APP.UserRowView = Backbone.View.extend({
+APP.DeviceRowView = Backbone.View.extend({
   // the wrapper defaults to div, so only need to set this if you want something else
   // like in this case we are in a table so a tr
   tagName: "tr",
@@ -11,13 +11,13 @@ APP.UserRowView = Backbone.View.extend({
   // the constructor
   initialize: function (options) {
     // model is passed through
-    this.user  = options.user;
-    this.users = options.users;
+    this.device  = options.device;
+    this.devices = options.devices;
   },
 
   // populate the html to the dom
   render: function () {
-    this.$el.html(_.template($('#userRowTemplate').html(), this.user.toJSON()));
+    this.$el.html(_.template($('#deviceRowTemplate').html(), this.device.toJSON()));
     return this;
   },
 
@@ -25,7 +25,7 @@ APP.UserRowView = Backbone.View.extend({
   destroy: function (event) {
     event.preventDefault();
     event.stopPropagation();
-    this.user.destroy();
+    this.device.destroy();
     this.$el.remove();
   }
 });
