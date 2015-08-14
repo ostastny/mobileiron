@@ -2,7 +2,8 @@
 window.APP = window.APP || {};
 APP.Router = Backbone.Router.extend({
   routes: {
-    "users/index": "index"
+    "users/index": "index",
+    "users/new": "create",
   },
 
   initialize: function (options) {
@@ -21,5 +22,13 @@ APP.Router = Backbone.Router.extend({
         	 $('#primary-content').html(that.currentView.render().el);
           }
         });
+  },
+  
+  create: function () {
+	  this.currentView = new APP.UserNewView({
+	      users: this.users, user: new APP.UserModel()
+	  });
+
+	  $('#primary-content').html(this.currentView.render().el);
   }
 });

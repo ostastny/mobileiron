@@ -23,6 +23,7 @@
   <script type="text/javascript" src="js/models/user.js"></script>
   <script type="text/javascript" src="js/views/user_index.js"></script>
   <script type="text/javascript" src="js/views/user_row.js"></script>
+  <script type="text/javascript" src="js/views/user_new.js"></script>
 </head>
 
 <body>
@@ -50,7 +51,7 @@
       <tbody></tbody>
     </table>
     <div class="well">
-      <a class="btn btn-block btn-large btn-info" href="#user/new">Create New User</a>
+      <a class="btn btn-block btn-large btn-info" href="#users/new">Create New User</a>
     </div>
   </script>
   
@@ -62,6 +63,26 @@
     <td>
       <a href="#" class="delete btn btn-danger btn-small">delete</a>
     </td>
+  </script>
+  
+  <!-- the form, used for user create and edit -->
+  <script type="text/jst" id="formTemplate">
+    <div class="well">
+      <div class="alert alert-danger fade in" style="display:none;"></div>
+      <form>
+        <h2><%= name %></h2>
+        <div class="form-group">
+          <label>Name:</label>
+          <input type="text" class="form-control" name="name" value="<%= name %>" />
+        </div>
+        <div class="form-group">
+          <label>Email:</label>
+          <input type="text" class="form-control" name="email" value="<%= email %>" />
+        </div>
+        <button class="save btn btn-large btn-info" type="submit">Save</button>
+        <a href="#users/index" class="btn btn-large">Cancel</a>
+      </form>
+    </div>
   </script>
   
   <!-- kick off the app -->

@@ -3,11 +3,14 @@ package cz.ondrejstastny.mobileiron.model;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.core.Response;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.jvnet.hk2.annotations.Service;
+
+import cz.ondrejstastny.mobileiron.AppException;
 
 @Service
 public class UserRepository implements IUserRepository{
@@ -43,20 +46,29 @@ public class UserRepository implements IUserRepository{
 	}
 
 	@Override
-	public void saveOrUpdate(User item) {
+	public void saveOrUpdate(User item) throws AppException {
 		Session session = sessionFactory.openSession();
 
     	Transaction tx = null;
     	try {
     	   tx = session.beginTransaction();
 
-    	   session.get(User.class, item.getId()); 
-    	   User itemCopy = (User) session.merge(item); 
+    	   Integer id = item.getId();
+    	   if(id != null) {
+	    	   User itemCopy = (User) session.merge(item); 
+	    	   session.saveOrUpdate(itemCopy);
+    	   }
+    	   else
+    	   {
+    		   session.save(item);
+    	   }
     	   
-    	   session.saveOrUpdate(itemCopy);
-
     	   tx.commit();
+    	}catch(org.hibernate.exception.ConstraintViolationException ex) {
+    		throw new AppException(409, 0, ex.getMessage(), ex.getSQLException().getMessage(), null);	//Conflict
     	}finally {
+    		if(tx.isActive())
+    			tx.rollback();
     	   session.close();
     	}
 	}
