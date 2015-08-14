@@ -4,7 +4,8 @@ APP.Router = Backbone.Router.extend({
   routes: {
     "users/index": "index",
     "users/new": "create",
-    "users/:id/view": "show"
+    "users/:id/view": "show",
+    "users/:id/edit": "edit"
   },
 
   initialize: function (options) {
@@ -31,6 +32,14 @@ APP.Router = Backbone.Router.extend({
 	  });
 
 	  $('#primary-content').html(this.currentView.render().el);
+  },
+  
+  edit: function (id) {
+	    var user = this.users.get(id);
+	    this.currentView = new APP.UserNewView({
+	    	users: this.users, user: user
+	    });
+	    $('#primary-content').html(this.currentView.render().el);
   },
   
   show: function (id) {
