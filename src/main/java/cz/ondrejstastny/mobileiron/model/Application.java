@@ -64,7 +64,7 @@ public class Application {
 	}
 	
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "applications")
 	public Set<Device> getDevices() {
 		return devices;
 	}

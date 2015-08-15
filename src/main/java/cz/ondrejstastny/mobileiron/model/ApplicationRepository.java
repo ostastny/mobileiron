@@ -11,31 +11,41 @@ import org.hibernate.criterion.Restrictions;
 
 import cz.ondrejstastny.mobileiron.AppException;
 
-public class DeviceRepository implements IDeviceRepository {
+public class ApplicationRepository implements IApplicationRepository {
 
 	@Inject Session session;
-	
+
 	@Override
-	public List<Device> getAllForUser(Integer userId) {
-    	List<Device> devices = null; 
-    	devices = session.createCriteria(Device.class)
-    			     	.add( Restrictions.eq("user.id", userId) )
-    			     	.list();
-    	
-        return devices;
+	public List<Application> getAll() {
+		List<Application> apps = null; 
+		
+		apps = session.createCriteria(Application.class).list();
+		
+		return apps;
 	}
 
 	@Override
-	public Device getById(Integer id) {
-		Device device = null;
+	public List<Application> getAllForDevice(Integer deviceId) {
+    	List<Application> apps = null; 
     	
-		device = (Device) session.get(Device.class, id);
+    	apps = session.createCriteria(Application.class)
+    			     .add( Restrictions.eq("device.id", deviceId) )
+    			     .list();
     	
-        return device;
+        return apps;
+	}
+
+	@Override
+	public Application getById(Integer applicationId) {
+		Application application = null;
+    	
+    	application = (Application) session.get(Application.class, applicationId);
+    	
+        return application;
 	}
 	
 	@Override
-	public void saveOrUpdate(Device item) throws AppException {
+	public void saveOrUpdate(Application item) throws AppException {
     	Transaction tx = null;
     	try {
     	   tx = session.beginTransaction();
@@ -52,13 +62,13 @@ public class DeviceRepository implements IDeviceRepository {
 	}
 
 	@Override
-	public void deleteById(Integer id) {
+	public void deleteById(Integer applicationId) {
     	Transaction tx = null;
     	try {
     	   tx = session.beginTransaction();
 
-    	   Device device = (Device) session.get(Device.class, id); 
-    	   session.delete(device);
+    	   Application app = (Application) session.get(Application.class, applicationId); 
+    	   session.delete(app);
 
     	   tx.commit();
     	}finally {

@@ -26,7 +26,7 @@ public class Device {
 	private Integer id;
 	private String phoneNumber;
 	private String operatingSystem;
-	private Set<Application> apps = new HashSet<Application>(0);
+	private Set<Application> applications = new HashSet<Application>(0);
 	private User user;
 	
 	
@@ -38,7 +38,7 @@ public class Device {
 		this.id = id;
 		this.phoneNumber = phoneNumber;
 		this.operatingSystem = operatingSystem;
-		this.apps = apps;
+		this.applications = apps;
 		this.user = user;
 	}
 
@@ -77,12 +77,12 @@ public class Device {
 			@JoinColumn(name = "devices_id", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "application_id", 
 					nullable = false, updatable = false) })
-	public Set<Application> getApps() {
-		return apps;
+	public Set<Application> getApplications() {
+		return applications;
 	}
 
-	public void setApps(Set<Application> apps) {
-		this.apps = apps;
+	public void setApplications(Set<Application> apps) {
+		this.applications = apps;
 	}
 
 	@JsonIgnore

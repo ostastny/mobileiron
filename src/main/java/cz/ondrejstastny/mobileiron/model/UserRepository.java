@@ -15,68 +15,46 @@ import cz.ondrejstastny.mobileiron.AppException;
 @Service
 public class UserRepository implements IUserRepository{
 
-	@Inject SessionFactory sessionFactory;
+	@Inject Session session;
 	
 	@Override
 	public List<User> getAll() {
-		Session session = sessionFactory.openSession();
-
     	List<User> users = null; 
-    	try {
-    		users = session.createCriteria(User.class).list();
-    	}finally {
-    	   session.close();
-    	}
+
+    	users = session.createCriteria(User.class).list();
     	
         return users;
 	}
 
 	@Override
 	public User getById(Integer id) {
-		Session session = sessionFactory.openSession();
-
+		
     	User user = null;
-    	try {
-    	  user = (User) session.get(User.class, id);
-    	}finally {
-    	   session.close();
-    	}
+
+    	user = (User) session.get(User.class, id);
     	
         return user;
 	}
 
 	@Override
 	public void saveOrUpdate(User item) throws AppException {
-		Session session = sessionFactory.openSession();
-
     	Transaction tx = null;
     	try {
     	   tx = session.beginTransaction();
 
-    	   Integer id = item.getId();
-    	   if(id != null) {
-	    	   User itemCopy = (User) session.merge(item); 
-	    	   session.saveOrUpdate(itemCopy);
-    	   }
-    	   else
-    	   {
-    		   session.save(item);
-    	   }
-    	   
+    	   session.saveOrUpdate(item);
+    	  
     	   tx.commit();
     	}catch(org.hibernate.exception.ConstraintViolationException ex) {
     		throw new AppException(409, 0, ex.getMessage(), ex.getSQLException().getMessage(), null);	//Conflict
     	}finally {
     		if(tx.isActive())
     			tx.rollback();
-    	   session.close();
     	}
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		Session session = sessionFactory.openSession();
-
     	Transaction tx = null;
     	try {
     	   tx = session.beginTransaction();
@@ -86,7 +64,8 @@ public class UserRepository implements IUserRepository{
 
     	   tx.commit();
     	}finally {
-    	   session.close();
+    		if(tx.isActive())
+    			tx.rollback();
     	}
 	}
 
