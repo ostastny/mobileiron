@@ -1,5 +1,5 @@
 "use strict";
-APP.UserShowView = Backbone.View.extend({
+APP.UserShowView = Backbone.View.extend({  
   // the constructor
   initialize: function (options) {
     this.user = options.user;
@@ -24,7 +24,8 @@ APP.UserShowView = Backbone.View.extend({
    addDevice: function (device) {
 	   var view = new APP.DeviceRowView({
 		    devices: this.devices, 
-		    device: device
+		    device: device,
+		    user: this.user
 	   });
 	   this.$el.find('table#devices tbody').append(view.render().el);
 	}

@@ -5,7 +5,8 @@ APP.DeviceRowView = Backbone.View.extend({
   tagName: "tr",
   // functions to fire on events
   events: {
-    "click a.delete": "destroy"
+    "click a.delete": "destroy",
+    "click a.edit": "edit"
   },
 
   // the constructor
@@ -13,6 +14,7 @@ APP.DeviceRowView = Backbone.View.extend({
     // model is passed through
     this.device  = options.device;
     this.devices = options.devices;
+    this.user = options.user;
   },
 
   // populate the html to the dom
@@ -27,5 +29,13 @@ APP.DeviceRowView = Backbone.View.extend({
     event.stopPropagation();
     this.device.destroy();
     this.$el.remove();
+  },
+  
+  edit: function (event) {
+	    event.preventDefault();
+	    event.stopPropagation();
+	  var location = "/users/" + this.user.id + "/devices/" + this.device.id + "/edit";
+	  //window.location.hash = location;
+      window.router.navigate(location, {trigger: true});
   }
 });

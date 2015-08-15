@@ -5,7 +5,10 @@ APP.Router = Backbone.Router.extend({
     "users/index": "index",
     "users/new": "create",
     "users/:id/view": "show",
-    "users/:id/edit": "edit"
+    "users/:id/edit": "edit",
+
+    "users/:id/devices/new": "addDevice",
+    "users/:id/devices/:did/edit": "editDevice",
   },
 
   initialize: function (options) {
@@ -59,7 +62,32 @@ APP.Router = Backbone.Router.extend({
 	          }
 	        });
    },
+   
+   addDevice: function (id) {
+	     var user = this.users.get(id);
+		 this.currentView = new APP.DeviceNewView({
+		     device: new APP.DeviceModel(), devices: new APP.DeviceCollection(), user: user
+		 });
+
+		  $('#primary-content').html(this.currentView.render().el);
+	  },
 	  
+   editDevice: function (id, did) {
+	   var self = this;
+	   var user = self.users.get(id);
+	    var devices = new APP.DeviceCollection();
+		devices.fetch({
+		    success: function(devices) {
+		       var device = devices.get(did);
+			   self.currentView = new APP.DeviceNewView({
+				   device: device, devices: devices, user: user
+			   });
+			    $('#primary-content').html(self.currentView.render().el);
+		    }
+		});
+   },
+	  
+  //Utility function to parse current URL route
    current: function() {
 	   	var Router = this,
 		fragment = Backbone.history.fragment,

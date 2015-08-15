@@ -90,6 +90,10 @@ public class UsersResource {
         return user;
     }
     
+    /**
+  	 * Example: DELETE /users/1
+  	 * 
+  	 */
     @DELETE
     @Path("/{uid: \\d+}")
     @Produces(MediaType.APPLICATION_JSON)

@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import cz.ondrejstastny.mobileiron.AppException;
+
 public class DeviceRepository implements IDeviceRepository {
 
 @Inject SessionFactory sessionFactory;
@@ -43,22 +45,30 @@ public class DeviceRepository implements IDeviceRepository {
         return device;
 	}
 	
-	/*
 	@Override
-	public void saveOrUpdate(Device item) {
+	public void saveOrUpdate(Device item) throws AppException {
 		Session session = sessionFactory.openSession();
 
     	Transaction tx = null;
     	try {
     	   tx = session.beginTransaction();
 
-    	   session.get(Device.class, item.getId()); 
-    	   Device itemCopy = (Device) session.merge(item); 
+    	   Integer id = item.getId();
+    	   if(id != null) {
+    		   Device itemCopy = (Device) session.merge(item); 
+	    	   session.saveOrUpdate(itemCopy);
+    	   }
+    	   else
+    	   {
+    		   session.save(item);
+    	   }
     	   
-    	   session.saveOrUpdate(itemCopy);
-
     	   tx.commit();
+    	}catch(org.hibernate.exception.ConstraintViolationException ex) {
+    		throw new AppException(409, 0, ex.getMessage(), ex.getSQLException().getMessage(), null);	//Conflict
     	}finally {
+    		if(tx.isActive())
+    			tx.rollback();
     	   session.close();
     	}
 	}
@@ -78,6 +88,6 @@ public class DeviceRepository implements IDeviceRepository {
     	}finally {
     	   session.close();
     	}
-	}*/
+	}
 
 }
