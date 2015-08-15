@@ -3,7 +3,7 @@ APP.DeviceModel = Backbone.Model.extend({
   urlRoot : function(){
 	  var route = window.router.current();
 	  //needs better validation - verify that fragment is User
-	  return "/mobileiron/api/users/" + route.params[0] + "/devices";
+	  return "/api/users/" + route.params[0] + "/devices";
   },
   
   defaults: {
@@ -34,6 +34,6 @@ APP.DeviceCollection = Backbone.Collection.extend({
   url: function(){
 	  var route = window.router.current();
 	  //needs better validation - verify that fragment is User
-	  return "/mobileiron/api/users/" + route.params[0] + "/devices";
+	  return "/api/users/" + route.params[0] + "/devices";
   }
 });

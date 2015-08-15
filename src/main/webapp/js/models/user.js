@@ -1,6 +1,6 @@
 "use strict";
 APP.UserModel = Backbone.Model.extend({
-  urlRoot: '/mobileiron/api/users',
+  urlRoot: '/api/users',
   defaults: {
     name: "",
     email: ""
@@ -25,5 +25,5 @@ APP.UserModel = Backbone.Model.extend({
 APP.UserCollection = Backbone.Collection.extend({
   // Reference to this collection's model.
   model: APP.UserModel,
-  url: '/mobileiron/api/users'
+  url: '/api/users'
 });
