@@ -23,12 +23,17 @@
   <script type="text/javascript" src="js/router.js"></script>
   <script type="text/javascript" src="js/models/user.js"></script>
   <script type="text/javascript" src="js/models/device.js"></script>
+  <script type="text/javascript" src="js/models/application.js"></script>
   <script type="text/javascript" src="js/views/user_index.js"></script>
   <script type="text/javascript" src="js/views/user_row.js"></script>
   <script type="text/javascript" src="js/views/user_new.js"></script>
   <script type="text/javascript" src="js/views/user_view.js"></script>
   <script type="text/javascript" src="js/views/device_row.js"></script>
   <script type="text/javascript" src="js/views/device_new.js"></script>
+  <script type="text/javascript" src="js/views/device_view.js"></script>
+  <script type="text/javascript" src="js/views/application_row.js"></script>
+  <script type="text/javascript" src="js/views/application_new.js"></script>
+  <script type="text/javascript" src="js/views/application_form_row.js"></script>
 </head>
 
 <body>
@@ -98,7 +103,7 @@
       <li>
         <a href="#users/index">All Users</a>
       </li>
-      <li class="active">View User</li>
+      <li class="active">User</li>
     </ol>
 
     <h2>
@@ -124,11 +129,12 @@
   
    <script type="text/template" id="deviceRowTemplate">
     <td>
-      <a href="#devices/<%= id %>/view"><%= phoneNumber %></a>
+      <a href="#/users/<%= user.id %>/devices/<%= id %>/view"><%= phoneNumber %></a>
     </td>
     <td><%= operatingSystem %></td>
     <td>
-      <a href="#" class="edit btn btn-default btn-small">edit</a>
+      <a href="#/users/<%= user.id %>/devices/<%= id %>/view" class="view btn btn-default btn-small">view</a>
+      <a href="#/users/<%= user.id %>/devices/<%= id %>/edit" class="edit btn btn-primary btn-small">edit</a>
       <a href="#" class="delete btn btn-danger btn-small">remove</a>
     </td>
   </script>
@@ -153,12 +159,70 @@
     </div>
   </script>
   
+   <!-- the show template -->
+  <script type="text/template" id="deviceShowTemplate">
+    <ol class="breadcrumb">
+      <li>
+        <a href="#users/index">All Users</a>
+      </li> 
+      <li>
+        <a href="#users/<%= user.id %>/view">User <%= user.name %></a>
+      </li>
+      <li class="active">Device</li>
+    </ol>
+
+    <h2>
+      <%= phoneNumber %>
+      <small><%= operatingSystem %></small>
+    </h2>
+    <hr/>
+	
+	<table class="table table-striped" id="apps">
+      <thead>
+        <tr>
+          <th width="20%">Name</th>
+          <th width="50%">Description</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="well">
+      <a class="btn btn-block btn-large btn-info" href="#users/<%= user.id %>/devices/<%= id %>/applications/new">Add Application</a>
+    </div>
+  </script>
+  
+   <script type="text/template" id="appRowTemplate">
+    <td><%= name %></td>
+    <td><%= description %></td>
+    <td>
+      <a href="#" class="delete btn btn-danger btn-small">remove</a>
+    </td>
+  </script>
+  
+   <!-- the form, used for user create and edit -->
+  <script type="text/jst" id="appFormTemplate">
+    <div class="well">
+      <div class="alert alert-danger fade in" style="display:none;"></div>
+      <form>
+        <div id="apps">
+        </div>
+        <button class="save btn btn-large btn-info" type="submit">Save</button>
+        <a href="#users/<%= user.id %>/devices/<%= device.id %>/view" class="btn btn-large">Cancel</a>
+      </form>
+    </div>
+  </script>
+  
+  <script type="text/template" id="appFormRowTemplate">
+    <div class="radio">
+  		<label><input type="radio" name="optapp" value="<%= id %>"><%= name %></label>
+	</div>
+  </script>
+  
   
   <!-- kick off the app -->
   <script type="text/javascript">
-    window.router = new APP.Router({
-      users: new APP.UserCollection()
-    });
+    window.router = new APP.Router({});
    
     //tell backbone to watch the urls
     Backbone.history.start();

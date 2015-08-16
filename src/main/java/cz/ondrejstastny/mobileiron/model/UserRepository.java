@@ -42,7 +42,15 @@ public class UserRepository implements IUserRepository{
     	try {
     	   tx = session.beginTransaction();
 
-    	   session.saveOrUpdate(item);
+    	   if(item.getId() != null)
+    	   {
+    		   User itemCopy = (User) session.merge(item);
+        	   session.saveOrUpdate(itemCopy);
+    	   }
+    	   else
+    	   {
+    		   session.save(item);
+    	   }
     	  
     	   tx.commit();
     	}catch(org.hibernate.exception.ConstraintViolationException ex) {

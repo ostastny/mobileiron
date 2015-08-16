@@ -28,8 +28,8 @@ public class ApplicationRepository implements IApplicationRepository {
 	public List<Application> getAllForDevice(Integer deviceId) {
     	List<Application> apps = null; 
     	
-    	apps = session.createCriteria(Application.class)
-    			     .add( Restrictions.eq("device.id", deviceId) )
+    	apps = session.createCriteria(Application.class).createAlias("devices", "da")
+    			     .add( Restrictions.eq("da.id", deviceId) )
     			     .list();
     	
         return apps;
@@ -50,7 +50,16 @@ public class ApplicationRepository implements IApplicationRepository {
     	try {
     	   tx = session.beginTransaction();
 
-    	   session.saveOrUpdate(item);
+    	   if(item.getId() != null)
+    	   {
+    		   Application itemCopy = (Application) session.merge(item);
+        	   session.saveOrUpdate(itemCopy);
+    	   }
+    	   else
+    	   {
+    		   session.save(item);
+    	   }
+    	  
     	  
     	   tx.commit();
     	}catch(org.hibernate.exception.ConstraintViolationException ex) {

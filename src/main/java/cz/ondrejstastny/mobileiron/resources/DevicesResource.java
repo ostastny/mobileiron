@@ -83,7 +83,7 @@ public class DevicesResource {
      /**
  	 * Example: PUT /users/1/devices/1
  	 * 
- 	 * @return user with given id
+ 	 * @return device with given id
  	 */
      @PUT
      @Path("/{did: \\d+}")
@@ -93,7 +93,6 @@ public class DevicesResource {
     	//we make sure that there is a relation between the user and the device
     	User user = userRepository.getById(uid);
     	device.setUser(user);
-    	deviceRepository.saveOrUpdate(device);
     	device.setId(did);
     	
      	deviceRepository.saveOrUpdate(device);
@@ -114,6 +113,22 @@ public class DevicesResource {
      	
      	return Response.ok().build();	//but really should be 204 based on RFC 7231
      }
+     
+     /**
+      * List all applications for on the device
+      * 
+      * Example: GET /users/1/devices/1/applications
+      */
+      @GET
+      @Path("{did: \\d+}/applications")
+      @Produces(MediaType.APPLICATION_JSON)
+      public List<Application> getApplications(@PathParam("uid") Integer uid, @PathParam("did") Integer did) throws AppException  {
+    	  //add user id validation
+    	  
+    	  List<Application> apps = applicationRepository.getAllForDevice(did);
+    	  
+    	  return apps;
+      }
      
      /**
       * Create new association between app and device

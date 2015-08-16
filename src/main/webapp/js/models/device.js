@@ -1,7 +1,7 @@
 "use strict";
 APP.DeviceModel = Backbone.Model.extend({
   urlRoot : function(){
-	  var route = window.router.current();
+	  var route = window.router._current();
 	  //needs better validation - verify that fragment is User
 	  return "/api/users/" + route.params[0] + "/devices";
   },
@@ -32,7 +32,7 @@ APP.DeviceCollection = Backbone.Collection.extend({
   // Reference to this collection's model.
   model: APP.DeviceModel,
   url: function(){
-	  var route = window.router.current();
+	  var route = window.router._current();
 	  //needs better validation - verify that fragment is User
 	  return "/api/users/" + route.params[0] + "/devices";
   }

@@ -40,7 +40,15 @@ public class DeviceRepository implements IDeviceRepository {
     	try {
     	   tx = session.beginTransaction();
 
-    	   session.saveOrUpdate(item);
+    	   if(item.getId() != null)
+    	   {
+    		   Device itemCopy = (Device) session.merge(item);
+        	   session.saveOrUpdate(itemCopy);
+    	   }
+    	   else
+    	   {
+    		   session.save(item);
+    	   }
     	  
     	   tx.commit();
     	}catch(org.hibernate.exception.ConstraintViolationException ex) {
