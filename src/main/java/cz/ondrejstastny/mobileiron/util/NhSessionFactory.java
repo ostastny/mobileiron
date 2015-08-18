@@ -16,8 +16,8 @@ public class NhSessionFactory implements Factory<Session> {
         try {
             session = sessionFactory.openSession();
             System.out.println("Session open");
-        } catch (Throwable t) {
-            throw NhSessionFactory.<RuntimeException>unchecked(t);
+        } catch (Exception ex) {
+            throw NhSessionFactory.<RuntimeException>unchecked(ex);
         }
         return session;
     }

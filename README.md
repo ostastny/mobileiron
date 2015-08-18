@@ -1,6 +1,6 @@
 # OndrejStastny MobileIron 
 
-![](https://travis-ci.org/ostastny/mobileiron.svg?branch=master)
+![Build Status](https://travis-ci.org/ostastny/mobileiron.svg?branch=master)
 
 ## Overview
 This is a sample implementation of [senior-software-engineer-spring-mvc-java](https://github.com/ostastny/hiring/blob/master/senior-software-engineer-spring-mvc-java.md).
@@ -36,5 +36,7 @@ API can be viewed using Swagger UI on [this endpoint](http://ostastny-mobileiron
 * Server-side repository inheritance of common functionality from a baseclass
 * DB password in Git repo in config file
 
+## SonarQube code analysis
+Code quality report is available on [SonarQube instance](http://os-sonarqube.cloudapp.net/dashboard/index/1)
 
 ![Swagger UI Screenshot](/screen02.png?raw=true)

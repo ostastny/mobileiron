@@ -10,8 +10,8 @@ APP.Router = Backbone.Router.extend({
     "users/:id/devices/new": "addDevice",
     "users/:id/devices/:did/edit": "editDevice",
     "users/:id/devices/:did/view": "showDevice",
-    
-    "users/:id/devices/:did/applications/new": "addApplication",
+   
+    "users/:id/devices/:did/applications/new": "addApplication"
   },
 
   initialize: function (options) {

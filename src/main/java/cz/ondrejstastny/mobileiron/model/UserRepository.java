@@ -4,7 +4,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.core.Response;
-
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -54,6 +54,7 @@ public class UserRepository implements IUserRepository{
     	  
     	   tx.commit();
     	}catch(org.hibernate.exception.ConstraintViolationException ex) {
+    		Logger.getLogger(getClass()).error("DB error", ex);
     		throw new AppException(409, 0, ex.getMessage(), ex.getSQLException().getMessage(), null);	//Conflict
     	}finally {
     		if(tx.isActive())

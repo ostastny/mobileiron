@@ -5,7 +5,7 @@ APP.ApplicationRowView = Backbone.View.extend({
   tagName: "tr",
   // functions to fire on events
   events: {
-	    "click a.delete": "destroy",
+	    "click a.delete": "destroy"
   },
 
   // the constructor

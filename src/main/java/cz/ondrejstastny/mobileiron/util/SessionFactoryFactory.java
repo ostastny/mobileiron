@@ -19,7 +19,7 @@ public class SessionFactoryFactory implements Factory<SessionFactory> {
 	        
 			// Create the SessionFactory from hibernate.cfg.xml
 			return new Configuration().configure().buildSessionFactory();
-		} catch (Throwable ex) {
+		} catch (Exception ex) {
 			// Make sure you log the exception, as it might be swallowed
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);

@@ -26,6 +26,6 @@ public class ApplicationBinder extends AbstractBinder {
         bind(ApplicationRepository.class).to(IApplicationRepository.class);
         bindFactory(SessionFactoryFactory.class).to(SessionFactory.class).in(Singleton.class);
         bind(DevicesResource.class).to(DevicesResource.class);
-        bindFactory(NhSessionFactory.class).to(Session.class).in(RequestScoped.class);;
+        bindFactory(NhSessionFactory.class).to(Session.class).in(RequestScoped.class);
     }
 }
