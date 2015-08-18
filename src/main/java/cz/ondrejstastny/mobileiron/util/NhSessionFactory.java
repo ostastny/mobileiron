@@ -1,5 +1,6 @@
 package cz.ondrejstastny.mobileiron.util;
 
+import org.apache.log4j.Logger;
 import org.glassfish.hk2.api.Factory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -37,6 +38,8 @@ public class NhSessionFactory implements Factory<Session> {
     			tx.rollback();
         	session.close();
             System.out.println("Session close");
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
+    		Logger.getLogger(NhSessionFactory.class).error("NhSessionFactory error", ignore);
+    	}
     }
 }

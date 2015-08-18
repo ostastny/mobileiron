@@ -1,6 +1,6 @@
 # OndrejStastny MobileIron 
 
-![Build Status](https://travis-ci.org/ostastny/mobileiron.svg?branch=master)
+[![Build Status](https://travis-ci.org/ostastny/mobileiron.svg?branch=master)](https://travis-ci.org/ostastny/mobileiron)
 
 ## Overview
 This is a sample implementation of [senior-software-engineer-spring-mvc-java](https://github.com/ostastny/hiring/blob/master/senior-software-engineer-spring-mvc-java.md).
@@ -14,6 +14,8 @@ Live demo is available on [Heroku](http://ostastny-mobileiron.herokuapp.com).
 API can be viewed using Swagger UI on [this endpoint](http://ostastny-mobileiron.herokuapp.com/swagger).
 
 ![Application ScreenShot](/screen01.png?raw=true)
+
+![Swagger UI Screenshot](/screen02.png?raw=true)
 
 ## Technologies used
 * Jersey
@@ -29,14 +31,11 @@ API can be viewed using Swagger UI on [this endpoint](http://ostastny-mobileiron
 * Add unit tests for server and client
 * Add lazy loading support to the API
 * Create better server side validations (eg. email format etc.) using Hibernate Validators
-* Build Automation
-	* Add client side build automation (code analysis, bundling, minification,...)
-* Deployment automation
+* Enhance client side build automation (~~code analysis~~, bundling, minification,...)
+* Continuous Delivery
 * Client-side view inheritance of common functionality from a baseclass
 * Server-side repository inheritance of common functionality from a baseclass
 * DB password in Git repo in config file
 
 ## SonarQube code analysis
 Code quality report is available on [SonarQube instance](http://os-sonarqube.cloudapp.net/dashboard/index/1)
-
-![Swagger UI Screenshot](/screen02.png?raw=true)
