@@ -1,10 +1,12 @@
 # OndrejStastny MobileIron 
 
+![](https://travis-ci.org/ostastny/mobileiron.svg?branch=master)
+
 ## Overview
 This is a sample implementation of [senior-software-engineer-spring-mvc-java](https://github.com/ostastny/hiring/blob/master/senior-software-engineer-spring-mvc-java.md).
 
 The solution is composed of a server side RESTful API and client side JavaScript app.
-Server uses Jersey framework to create the API, Hibernate for ORM persistance layer, Jackson for JSON serialization, Maven for builds and Heroku for CI and hosting.
+Server uses Jersey framework to create the API, Hibernate for ORM persistance layer, Jackson for JSON serialization, Maven for builds, Travis for CI and Heroku for deployment hosting.
 Client side is written in Backbone.js and Bootstrap.
 
 ## Demo
