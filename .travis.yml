@@ -1,0 +1,5 @@
+language: java
+deploy:
+  provider: heroku
+  api_key: 125e71b14e7e22b3fd82a2b04ec40c3396bde540
+  app: ostastny-mobileiron
